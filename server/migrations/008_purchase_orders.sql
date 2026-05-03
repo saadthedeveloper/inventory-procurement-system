@@ -1,0 +1,20 @@
+CREATE TABLE purchase_orders(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    supplier_id INT NOT NULL,
+    created_by INT NOT NULL,
+    approved_by INT,
+    approved_at TIMESTAMP,
+    `status` VARCHAR(20) NOT NULL DEFAULT 'pending',
+    notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES users(id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+    FOREIGN KEY (approved_by) REFERENCES users(id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+);
