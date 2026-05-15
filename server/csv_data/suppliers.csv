@@ -1,0 +1,51 @@
+id,name,contact_person,email,phone,payment_terms,is_active,created_at
+1,Collins LLC,Tamara Mullins,gilmoreaaron@example.org,001-934-300-1256x789,Net 15,1,2026-02-18T07:17:16.746532
+2,Gordon-Wiggins,Adrian Walters,slarson@example.com,742.325.6106x20368,Net 15,1,2026-02-16T02:46:51.141851
+3,Morris-Anderson,Melissa Jordan,wendyguzman@example.com,384-318-9612x796,Net 30,0,2026-02-09T00:30:09.010863
+4,Jackson LLC,Jeffrey Delgado,phamwilliam@example.com,+1-547-890-6471x52580,Net 15,1,2026-05-02T14:52:26.687864
+5,Jackson-Burton,Raymond Johnson,rosalesmichael@example.net,589.823.0213,Net 15,1,2026-01-12T07:07:10.247030
+6,Gonzalez Inc,Richard Thompson,lcastro@example.net,972-864-0191x74563,Net 15,1,2026-04-02T14:42:28.571958
+7,Williams-Smith,Sean Leon,christina09@example.net,+1-365-911-3738x574,Net 60,1,2026-02-28T20:41:50.375471
+8,Hurley and Sons,Tara Adkins,tracy46@example.net,(956)743-5398x455,Net 30,0,2026-03-03T02:04:12.963692
+9,Hull PLC,Steven Stewart,stephensanthony@example.org,001-989-930-6916x35792,Net 30,0,2026-04-29T18:39:48.330153
+10,Cochran-Houston,Peter Hawkins,scottlouis@example.com,2675270025,Net 30,0,2026-01-01T02:59:44.313504
+11,"Horn, Velazquez and Lamb",Robert Orr,pcannon@example.org,(243)467-1676,Net 30,0,2026-03-22T07:23:59.910412
+12,"Murphy, Roman and Kennedy",Phillip Jenkins,loganpitts@example.com,001-891-578-4307x03922,COD,0,2026-03-26T11:31:59.756092
+13,"Lawson, Burns and Weeks",Kelly Banks,gonzalezrobert@example.net,628.333.3789,Net 30,1,2026-04-02T06:33:53.384333
+14,Aguilar and Sons,Mallory Collins,devin15@example.com,001-846-298-7888,Net 60,0,2026-04-24T20:00:30.338380
+15,"Payne, Foster and Johnson",Morgan Dean,bbaker@example.org,434-295-4270,Net 15,0,2026-05-09T19:57:56.589060
+16,White-Flores,Michael Howard,nicolemeyers@example.org,+1-676-593-4795,COD,1,2026-02-17T05:16:01.835900
+17,Maddox-Graham,Lisa Black,johnpaul@example.org,(356)830-1338x4829,Net 60,1,2026-03-11T17:26:00.237688
+18,"Delgado, Marshall and Williams",Sean Tanner,ellentaylor@example.net,(320)993-7939x8757,Net 60,0,2026-01-06T13:09:35.787488
+19,Le and Sons,Susan Hill,dcollins@example.org,907-953-8171x1417,Net 15,0,2026-03-21T12:53:25.884812
+20,Burns PLC,Michael Flores,dcastaneda@example.com,921-607-3431x8513,Net 60,0,2026-01-11T08:37:23.760751
+21,"Simpson, Moore and Castillo",Michael Anderson,hicksrachel@example.net,+1-812-411-8969x1634,Net 15,0,2026-02-02T04:01:31.060349
+22,Elliott Inc,Joanne Burton,justin53@example.net,739-453-2661x0313,COD,1,2026-03-27T20:50:20.500645
+23,"Stevens, Salazar and Kirby",Megan Lewis,pboyer@example.org,(239)469-0904x50750,COD,1,2026-03-17T06:59:39.276717
+24,Ford LLC,Jason Smith,maddenallison@example.net,001-821-270-3399,COD,0,2026-04-13T20:22:43.243058
+25,Haynes-Marsh,Susan Martinez,garciacharles@example.com,(307)965-1350x05028,COD,0,2026-01-27T01:21:18.887886
+26,"White, Roy and Berry",Jennifer Lewis,patricia95@example.com,5064729803,COD,1,2026-01-18T07:55:31.677386
+27,Daniels-Simpson,Alison Sanford,melissaparsons@example.org,476-639-9465x29786,COD,0,2026-04-16T17:14:38.027805
+28,"Espinoza, Nguyen and Snow",Ethan Kennedy,joshua12@example.org,001-903-617-9762,Net 15,1,2026-04-13T12:32:40.465180
+29,Flynn-Zhang,Mrs. Ann Johnson,catherinehart@example.org,(259)545-2546x9535,COD,1,2026-04-14T14:25:08.075204
+30,Johnson Inc,Jennifer Curry,stephenselizabeth@example.com,7057321517,Net 60,0,2026-02-13T04:58:13.268381
+31,Perry LLC,Timothy Clark,frankchristina@example.net,001-427-741-6181x12422,Net 30,1,2026-04-17T14:06:21.472220
+32,Walton-Graham,Steve Walker,patriciapeters@example.net,001-668-628-1994x3368,COD,0,2026-04-15T20:59:53.134828
+33,Marsh-Cruz,Dawn Smith,walteranna@example.com,001-401-675-6171x42629,Net 15,1,2026-02-18T14:40:18.423715
+34,"Carlson, Austin and Rice",Amanda Davila,christopher82@example.net,703-800-4050x49917,COD,1,2026-04-28T12:43:00.247238
+35,Parker-Gibson,Jeffrey Johnson,patelmary@example.com,001-405-497-1036,Net 30,1,2026-02-17T19:42:19.645511
+36,Stewart Inc,Laura Nunez,jonesmichele@example.net,001-708-587-4072,Net 60,1,2026-04-10T15:02:39.012180
+37,Wilson Ltd,Paul Richmond,qcampbell@example.net,+1-760-244-3993x825,COD,0,2026-04-03T03:01:42.132992
+38,"Anderson, Kramer and Turner",Colin Weber MD,jessica15@example.org,225.859.4236,Net 15,0,2026-03-19T20:27:57.339840
+39,Pierce-Lewis,Tamara Gibson,colestephanie@example.net,341-316-0623x78669,Net 30,0,2026-04-23T18:58:00.304589
+40,Salas-Church,Katherine Shaw,tcervantes@example.org,(400)977-7983x192,Net 30,1,2026-03-16T16:44:16.371878
+41,"Beard, Oconnell and Martin",Bradley Ford,travisflynn@example.org,985.283.1365,Net 60,0,2026-02-16T00:55:05.214167
+42,Lane and Sons,Jacob Reed,joel47@example.org,225.596.7649,Net 60,1,2026-05-10T04:57:11.168750
+43,Martinez Inc,Jamie Everett,griffinnichole@example.com,(302)778-1310x0768,Net 15,1,2026-01-01T01:20:36.895104
+44,Davis PLC,Virginia Holmes,odennis@example.net,(640)421-3135x15730,Net 30,0,2026-05-02T01:01:21.590037
+45,Sanchez Inc,Cathy Juarez,jennifer50@example.org,952-697-2215x0144,Net 15,0,2026-02-09T12:40:59.089737
+46,Hanna-Bass,Christopher Castillo,brianwhite@example.net,001-767-350-2110,COD,0,2026-01-03T19:05:13.706587
+47,Melton LLC,Ashley Bryant,bethanyparsons@example.com,(875)407-1471,COD,1,2026-01-19T23:56:47.379571
+48,Leon-Flores,David Lane,jacquelinebaldwin@example.com,001-692-691-8192x8474,Net 60,1,2026-03-09T04:28:56.752308
+49,"Cohen, Rangel and Garcia",Kevin Leach,kevinduke@example.org,254-686-1733x5146,Net 30,0,2026-02-21T05:49:24.852538
+50,"Payne, Miller and Morales",Joel Jones,sparkskimberly@example.net,(794)819-8226x989,Net 15,1,2026-04-22T20:17:02.728833
