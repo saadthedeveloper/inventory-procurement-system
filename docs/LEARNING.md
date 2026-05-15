@@ -1,76 +1,118 @@
-## 2026-04-30
+## April 30, 2026
 
-### 1. What is a migration file
+### Understanding Migration Files
 
-A migration file is a **numbered file** (usually SQL, but could be Python or PHP) that contains DDL commands like `CREATE TABLE` or `ALTER TABLE`, to manage database schema changes in a structured and repeatable way. It lives alongside the application code.
+A migration file is a numbered file—typically SQL, though it can be written in Python or PHP—that contains DDL (Data Definition Language) commands such as `CREATE TABLE` or `ALTER TABLE`. These files manage database schema changes in a structured, repeatable manner and are version-controlled alongside application code.
 
-The numbering gives files a strict order. For example, `001_roles.sql` must run before `002_users.sql` because the `users` table depends on `roles`. Running them out of order would cause a database error.
+The numbering system enforces strict execution order. For instance, `001_roles.sql` must execute before `002_users.sql` because the `users` table has a foreign key dependency on `roles`. Executing migrations out of sequence would trigger database constraint errors.
 
-### 2. How migrate.js and the tracking table work
+### How Migration Scripts and Tracking Tables Work
 
-`migrate.js` is a small script that:
+`migrate.js` is a lightweight script that orchestrates the migration process:
 
-- Connects to the database
-- Looks inside a `migrations/` folder for `.sql` files (like `001_roles.sql`, `002_users.sql`)
-- Checks a **tracking table** (often called `migrations_log`) to see which files already ran
-- Runs only the new files in order
-- Records each successful run in the tracking table
+- Establishes a database connection
+- Scans the `migrations/` directory for `.sql` files (e.g., `001_roles.sql`, `002_users.sql`)
+- Queries a tracking table (commonly named `migrations_log`) to identify previously executed migrations
+- Executes only new migration files in numerical order
+- Records each successful migration in the tracking table
 
-The tracking table is what prevents the same migration from running twice. The first time you run `migrate.js`, the script creates that tracking table automatically. After that, each migration file is recorded when it succeeds. That is why running the migration script a second time does nothing. The tracking table says "already did that."
+The tracking table serves as a safeguard against duplicate execution. On first run, `migrate.js` automatically creates this table. Subsequently, each migration is logged upon successful completion. This is why re-running the migration script has no effect—the tracking table indicates that all migrations have already been applied.
 
-### 3. Changing the schema requires new migrations, not edits
+### Schema Changes Require New Migrations
 
-Every time you need to change the schema (add a column, change a data type, add an index, drop a table), you write a **new migration file** that contains an `ALTER` statement. You never go back and edit an old migration file that has already been run on production.
+When modifying the database schema—whether adding columns, changing data types, creating indexes, or dropping tables—you must create a new migration file containing the appropriate `ALTER` statement. Never modify an existing migration file that has been executed in production.
 
-The only time editing an old migration is acceptable is during early development before you have a live production database, and you are willing to run `reset` (drop all tables and remigrate). But that is not safe for production.
+The only exception is during early development, before production deployment, when you can safely reset the database (drop all tables and re-migrate). However, this approach is never appropriate for production environments.
 
-### 4. Why migrations matter
+### Why Migrations Matter
 
-Not every SQL file is a migration. If you write `everything.sql` and run it manually when you remember, that is just a script. It is hard to repeat and easy to mess up.
+Not all SQL files qualify as migrations. A manually executed `everything.sql` script lacks repeatability and is error-prone.
 
 A proper migration system is:
 
-- Numbered or timestamped
-- Tracked automatically by a script
-- Stored in Git
-- Never edited after being applied to production
+- Numbered or timestamped for clear sequencing
+- Tracked automatically through scripts
+- Version-controlled in Git
+- Immutable once applied to production
 
-This makes database changes reliable, repeatable, and team friendly. Every developer gets the same database structure with one command.
+This approach makes database changes reliable, repeatable, and team-friendly. Every developer can achieve identical database structure with a single command.
 
-### Forward Migration
+### Forward and Backward Migrations
 
-A **forward migration** is a change that moves your database schema **forward** from one version to the next.
+**Forward migrations** advance your database schema from one version to the next.
 
 Example: `ALTER TABLE users ADD COLUMN phone VARCHAR(20);`
 
-### Backward Migration (Rollback)
-
-A **backward migration** (also called a "down migration") is the **reverse** of a forward migration. It takes the schema **back** to the previous state.
+**Backward migrations** (also called "down migrations" or "rollbacks") reverse a forward migration, returning the schema to its previous state.
 
 Example: `ALTER TABLE users DROP COLUMN phone;`
 
-### Key points about Migration
-- Rollbacks are **rarely used in production** because they can cause data loss.
-- Most teams write a **new forward migration** to fix mistakes instead of rolling back.
-- During **development only**, you can reset the database and reapply all migrations from scratch.
+**Important considerations:**
+- Rollbacks are rarely used in production due to potential data loss
+- Teams typically write new forward migrations to address mistakes rather than rolling back
+- During development only, you can reset the database and reapply all migrations from scratch
 
+---
 
-## 2026-05-3
-ON DELETE RESTRICT → you can’t delete a role if any user is using it;
-ON UPDATE CASCADE → if a role’s ID changes, it automatically updates in all users.
-primary keys rarely change so its optional
+## May 3, 2026
 
-## 2026-05-5
-- npm init -y is something you usually do when you’re starting a Node.js project in a folder, but it’s not mandatory. What it really does is create that package.json file, which helps Node (and npm) keep track of your project details and any libraries you install.
-- if someone else downloads your project, they can just run npm install, and Node will look at package.json and automatically install everything listed there. Without it, they’d have no idea what your project needs to work.
-- In JSON:
-    - Keys must be in double quotes ("name", not name)
-    - Values can only be simple things: strings, numbers, true/false, arrays, or other JSON objects
-    - You can’t put functions or logic inside it
+### Foreign Key Constraints
 
-# 2026-05-15
-You just created a Python virtual environment inside your /server folder. A virtual environment is an isolated container for Python packages. It prevents the libraries you install for this project (Flask, PyMySQL, etc.) from interfering with other Python projects on your computer or system-wide Python.
-The venv folder contains its own copy of Python and pip. Activating it with source venv/bin/activate tells your terminal to use this isolated environment instead of the global Python.
+`ON DELETE RESTRICT` prevents deletion of a role if any user references it, maintaining referential integrity.
 
-#2026-05-15
-.env is like a private sticky note where you write down your database password and other secrets that should never be shared publicly. config.py is a small program that reads that sticky note and hands those secrets to the rest of your application so it can log into the database and work properly, keeping your passwords out of your main code and safe from being accidentally uploaded to GitHub.
+`ON UPDATE CASCADE` automatically propagates changes when a role's ID is modified, updating all dependent user records.
+
+Note: Primary keys rarely change in practice, making `ON UPDATE CASCADE` optional in most cases.
+
+---
+
+## May 5, 2026
+
+### Understanding package.json
+
+Running `npm init -y` when starting a Node.js project creates a `package.json` file. While not strictly mandatory, this file serves as the project's manifest, tracking metadata and dependencies.
+
+When another developer clones your project, they can simply run `npm install`, and Node will reference `package.json` to automatically install all required libraries. Without this file, there's no record of project dependencies.
+
+### JSON Syntax Rules
+
+In JSON:
+- Keys must use double quotes (`"name"`, not `name`)
+- Values are limited to primitives: strings, numbers, booleans, arrays, or nested objects
+- Functions and executable logic are not permitted
+
+---
+
+## May 15, 2026
+
+### Python Virtual Environments
+
+A virtual environment is an isolated Python environment specific to a single project. Creating a `venv` folder in your `/server` directory prevents library conflicts between projects and avoids polluting the system-wide Python installation.
+
+The `venv` folder contains its own Python interpreter and pip package manager. Activating it with `source venv/bin/activate` instructs your shell to use this isolated environment rather than the global Python installation.
+
+### Configuration Management
+
+`.env` is a private configuration file containing sensitive information like database credentials and API keys that should never be committed to version control.
+
+`config.py` reads the `.env` file and exposes these secrets to your application securely, keeping credentials out of source code and preventing accidental exposure through Git.
+
+### Environment Variables
+
+Environment variables are dynamic key-value pairs stored outside application source code that configure running processes.
+
+**`.env`**: Contains actual environment variables—database credentials, JWT secret keys, and application settings. This file is excluded from version control and must never be committed.
+
+**`.env.example`**: A template documenting required variable names without actual values. This file is committed to the repository to guide configuration.
+
+### Project Structure Components
+
+**`requirements.txt`**: Lists all Python dependencies for the project. Running `pip install -r requirements.txt` installs the exact package versions needed, ensuring consistency across development environments.
+
+**`config.py`**: Loads environment variables from `.env` and makes them accessible throughout the application.
+
+**`db.py`**: Provides a database connection helper. Any module requiring database access imports this file.
+
+**`run.py`**: The application entry point. Running this file starts the Flask server and binds it to port 5000.
+
+**`app/__init__.py`**: The Flask application factory. This file configures CORS (enabling frontend-backend communication), JWT authentication (for token-based auth), and registers API route blueprints.

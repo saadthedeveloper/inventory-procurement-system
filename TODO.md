@@ -2,15 +2,15 @@
 
 ## Phase 0: Project Setup (Flask Migration)
 
-- [ ] Remove Node.js artifacts from `/server` (`package.json`, `package-lock.json`, `.gitkeep`)
-- [ ] Update `README.md` to reflect Python/Flask instead of Node.js
+- [X] Remove Node.js artifacts from `/server` (`package.json`, `package-lock.json`, `.gitkeep`)
+- [X] Update `README.md` to reflect Python/Flask instead of Node.js
 - [ ] Update `DEVLOG.md` with decision to switch to Flask (reason: course requirement + AI readiness)
-- [ ] Verify Python 3.10+ is installed (`python3 --version`)
-- [ ] Create Python virtual environment in `/server`: `python3 -m venv venv`
-- [ ] Activate virtual environment (`source venv/bin/activate` or `venv\Scripts\activate`)
-- [ ] Install dependencies: `flask`, `flask-cors`, `flask-jwt-extended`, `pymysql`, `bcrypt`, `python-dotenv`
-- [ ] Run `pip freeze > requirements.txt`
-- [ ] Add `venv/`, `__pycache__/`, `*.pyc` to root `.gitignore`
+- [X] Verify Python 3.10+ is installed (`python3 --version`)
+- [X] Create Python virtual environment in `/server`: `python3 -m venv venv`
+- [X] Activate virtual environment (`source venv/bin/activate` or `venv\Scripts\activate`)
+- [X] Install dependencies: `flask`, `flask-cors`, `flask-jwt-extended`, `pymysql`, `bcrypt`, `python-dotenv`
+- [X] Run `pip freeze > requirements.txt`
+- [X] Add `venv/`, `__pycache__/`, `*.pyc` to root `.gitignore`
 
 ## Phase 1: Database Migrations & Schema
 
