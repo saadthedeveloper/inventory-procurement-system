@@ -116,3 +116,12 @@ Environment variables are dynamic key-value pairs stored outside application sou
 **`run.py`**: The application entry point. Running this file starts the Flask server and binds it to port 5000.
 
 **`app/__init__.py`**: The Flask application factory. This file configures CORS (enabling frontend-backend communication), JWT authentication (for token-based auth), and registers API route blueprints.
+
+---
+
+## May 17, 2026
+
+### Changing The Statement Separator
+MySQL treats a semicolon (;) as the end of a command. But inside a trigger, we need to write multiple lines with semicolons (like IF ... THEN ... END IF;). If we keep the normal semicolon, MySQL would stop at the first semicolon inside the trigger and get confused.
+
+So the line DELIMITER $$ tells MySQL: "For now, treat $$ as the end of a command instead of semicolon." At the end, DELIMITER ; changes it back to normal.
