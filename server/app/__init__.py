@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from app.config import Config
@@ -9,9 +9,25 @@ def create_app():
 
     CORS(app)
     JWTManager(app)
-
-    # Routes will be registered here later
-    # from app.routes.auth import auth_bp
-    # app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    
+    # Temporary test route
+    @app.route('/')
+    def home():
+        return 'Server is running'
+    
+    @app.route('/test')
+    def test():
+        return jsonify({"status": "ok"})
+    
+    # Register blueprints
+    from app.routes.auth import auth_bp
+    app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    
+    # Debug: Print registered routes
+    print("\n=== Registered Routes ===")
+    for rule in app.url_map.iter_rules():
+        print(f"{rule.endpoint}: {rule.rule} {list(rule.methods)}")
+    print("========================\n")
 
     return app
+
