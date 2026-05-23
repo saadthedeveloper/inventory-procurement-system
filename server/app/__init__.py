@@ -21,8 +21,20 @@ def create_app():
     
     # Register blueprints
     from app.routes.auth import auth_bp
-    app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    from app.routes.products import products_bp
+    from app.routes.categories import categories_bp
+    from app.routes.units import units_bp
+    from app.routes.suppliers import suppliers_bp
+    from app.routes.purchase_orders import purchase_orders_bp
+    from app.routes.reports import reports_bp
     
+    app.register_blueprint(reports_bp, url_prefix="/api/reports")
+    app.register_blueprint(purchase_orders_bp, url_prefix="/api/purchase-orders")	
+    app.register_blueprint(units_bp, url_prefix="/api/units")
+    app.register_blueprint(suppliers_bp, url_prefix="/api/suppliers")
+    app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    app.register_blueprint(products_bp, url_prefix="/api/products")
+    app.register_blueprint(categories_bp, url_prefix="/api/categories")    
     # Debug: Print registered routes
     print("\n=== Registered Routes ===")
     for rule in app.url_map.iter_rules():
@@ -30,4 +42,3 @@ def create_app():
     print("========================\n")
 
     return app
-
