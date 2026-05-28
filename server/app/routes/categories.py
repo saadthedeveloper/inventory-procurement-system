@@ -11,7 +11,7 @@ def is_admin():
 # ------------------------------------------------------------------
 # GET /categories - List all categories (any authenticated user)
 # ------------------------------------------------------------------
-@categories_bp.route("/", methods=["GET"])
+@categories_bp.route("", methods=["GET"])
 @jwt_required()
 def get_categories():
     conn = get_connection()
@@ -39,7 +39,7 @@ def get_category(category_id):
 # ------------------------------------------------------------------
 # POST /categories - Create a new category (Admin only)
 # ------------------------------------------------------------------
-@categories_bp.route("/", methods=["POST"])
+@categories_bp.route("", methods=["POST"])
 @jwt_required()
 def create_category():
     if not is_admin():

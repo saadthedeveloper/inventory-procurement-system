@@ -1,16 +1,69 @@
-# React + Vite
+# Inventory Pro — React Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A complete dark-themed React frontend for the Inventory Management System.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 18** with Vite
+- **Tailwind CSS** (dark mode)
+- **React Router v6**
+- **Axios** for API calls
+- **Lucide React** for icons
 
-## React Compiler
+## Folder Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+client/
+  src/
+    api/
+      client.js           # Axios instance with auth interceptor
+    components/
+      DataTable.jsx        # Reusable searchable table
+      FormRenderer.jsx     # Schema-driven modal form
+      Navbar.jsx           # Top bar
+      ProtectedRoute.jsx   # Auth guard component
+      Sidebar.jsx          # Navigation sidebar
+    context/
+      AuthContext.jsx      # Auth state (login/logout/user)
+    pages/
+      Login.jsx
+      Dashboard.jsx        # Stats cards + low stock alerts
+      Products.jsx         # Full CRUD
+      Suppliers.jsx        # Full CRUD
+      Categories.jsx       # Full CRUD
+      PurchaseOrders.jsx   # Create / Approve / Receive
+      Reports.jsx          # Stock valuation + movement history
+    App.jsx                # Router + layout
+    main.jsx
+    index.css              # Tailwind directives
+```
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. **Install dependencies:**
+   ```bash
+   cd client
+   npm install
+   ```
+
+2. **Start the backend** on port 5000 (Flask API).
+
+3. **Run the dev server:**
+   ```bash
+   npm run dev
+   ```
+
+4. Open [http://localhost:5173](http://localhost:5173)
+
+## Roles
+
+| Role ID | Name    | Permissions                              |
+|---------|---------|------------------------------------------|
+| 1       | Admin   | Full access (CRUD, approve POs)          |
+| 2       | Manager | Create POs, view all                     |
+| 3       | Staff   | View only, receive approved POs          |
+
+## API Base URL
+
+The frontend connects to `http://localhost:5000/api` by default.
+To change it, edit `src/api/client.js`.

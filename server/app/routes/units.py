@@ -8,7 +8,7 @@ def is_admin():
     claims = get_jwt()
     return claims.get("role_id") == 1
 
-@units_bp.route("/", methods=["GET"])
+@units_bp.route("", methods=["GET"])
 @jwt_required()
 def get_units():
     conn = get_connection()
@@ -30,7 +30,7 @@ def get_unit(unit_id):
         return jsonify({"error": "Unit not found"}), 404
     return jsonify(unit), 200
 
-@units_bp.route("/", methods=["POST"])
+@units_bp.route("", methods=["POST"])
 @jwt_required()
 def create_unit():
     if not is_admin():

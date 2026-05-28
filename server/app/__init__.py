@@ -5,6 +5,7 @@ from app.config import Config
 
 def create_app():
     app = Flask(__name__)
+    app.url_map.strict_slashes = False
     app.config["JWT_SECRET_KEY"] = Config.JWT_SECRET_KEY
 
     CORS(app)

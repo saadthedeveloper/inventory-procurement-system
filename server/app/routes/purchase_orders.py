@@ -19,7 +19,7 @@ def is_staff():
 # ------------------------------------------------------------------
 # GET /purchase-orders - List all purchase orders (all authenticated users)
 # ------------------------------------------------------------------
-@purchase_orders_bp.route("/", methods=["GET"])
+@purchase_orders_bp.route("", methods=["GET"])
 @jwt_required()
 def get_purchase_orders():
     conn = get_connection()
@@ -81,7 +81,7 @@ def get_purchase_order(po_id):
 # ------------------------------------------------------------------
 # POST /purchase-orders - Create a new purchase order (Manager or Admin)
 # ------------------------------------------------------------------
-@purchase_orders_bp.route("/", methods=["POST"])
+@purchase_orders_bp.route("", methods=["POST"])
 @jwt_required()
 def create_purchase_order():
     # Only Manager or Admin can create

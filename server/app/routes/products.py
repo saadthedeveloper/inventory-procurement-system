@@ -12,7 +12,7 @@ def is_admin():
 # ------------------------------------------------------------------
 # GET /products - List all active products (Staff, Manager, Admin)
 # ------------------------------------------------------------------
-@products_bp.route("/", methods=["GET"])
+@products_bp.route("", methods=["GET"])
 @jwt_required()
 def get_products():
     conn = get_connection()
@@ -57,7 +57,7 @@ def get_product(product_id):
 # ------------------------------------------------------------------
 # POST /products - Create a new product (Admin only)
 # ------------------------------------------------------------------
-@products_bp.route("/", methods=["POST"])
+@products_bp.route("", methods=["POST"])
 @jwt_required()
 def create_product():
     if not is_admin():

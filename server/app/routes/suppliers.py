@@ -8,7 +8,7 @@ def is_admin():
     claims = get_jwt()
     return claims.get("role_id") == 1
 
-@suppliers_bp.route("/", methods=["GET"])
+@suppliers_bp.route("", methods=["GET"])
 @jwt_required()
 def get_suppliers():
     conn = get_connection()
@@ -30,7 +30,7 @@ def get_supplier(supplier_id):
         return jsonify({"error": "Supplier not found"}), 404
     return jsonify(supplier), 200
 
-@suppliers_bp.route("/", methods=["POST"])
+@suppliers_bp.route("", methods=["POST"])
 @jwt_required()
 def create_supplier():
     if not is_admin():
