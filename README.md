@@ -1,6 +1,3 @@
-Here is a complete `README.md` for your project. Save it in the project root folder.
-
-```markdown
 # Inventory & Procurement Management System
 
 A full‑stack web application for managing inventory, suppliers, purchase orders, and stock movements. Built with **React (Vite)** on the frontend, **Flask** on the backend, and **MySQL** as the database. Designed for a pharmacy use case but generic enough for any small‑business inventory.
@@ -208,13 +205,3 @@ inventory-procurement-system/
 ## License
 
 MIT
-
-## Acknowledgements
-
-- Built as a final project for Database Systems lab (BSCS).
-- Special thanks to the instructor for guidance.
-
----
-
-**Happy inventory managing!**
-```
