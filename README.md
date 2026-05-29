@@ -169,33 +169,6 @@ inventory-procurement-system/
 - **`low_stock_alerts` view** – Products with `quantity < reorder_level`.
 - **`stock_valuation` view** – Product name, quantity, unit price, and total value.
 
-## Testing the System
-
-1. **Log in** as Admin (`test@example.com` / `password123`).
-2. **Create a product**, a category, a supplier.
-3. **Create a purchase order** (Manager or Admin).
-4. **Approve** the order (Admin).
-5. **Mark as received** – stock will increase automatically.
-6. **Check low stock alerts** and **reports**.
-
-## Deployment
-
-- **Backend** (Railway / PythonAnywhere / your own server):
-  - Set environment variables, attach a MySQL database.
-  - Run `migrate.py` and `load_data.py` once.
-  - Use a production WSGI server (e.g., `gunicorn`).
-- **Frontend** (Vercel / Netlify):
-  - Build with `npm run build` and deploy the `dist` folder.
-  - Update `api/client.js` with your production backend URL.
-
-## Future Improvements
-
-- Add pagination and sorting to tables.
-- Real‑time notifications for low stock.
-- Export reports to PDF/Excel.
-- Multi‑warehouse support.
-- Optimistic locking for concurrent stock updates.
-
 ## License
 
 MIT
