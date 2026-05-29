@@ -99,17 +99,11 @@ The frontend will run at `http://localhost:5173`.
 
 Use one of the following demo accounts (created by `load_data.py`):
 
-| Email                     | Password       | Role    |
-|---------------------------|----------------|---------|
-| test@example.com          | password123    | Admin   |
-| gkaiser@example.net       | BW&&Q6Spr^&O   | Staff   |
-| cwarren@example.net       | (needs reset, see notes) | |
-
-> **Note:** Some users may have `is_active = 0` or plain‑text passwords. Run the following SQL in MySQL Workbench to activate a user and set a known password:
-> ```sql
-> UPDATE users SET is_active = 1, password = '$2b$12$iPii12gaof90yuWFnlrY3e.KBeYW8OEP8MtP227yjhabBH2gBduUu' WHERE email = 'cwarren@example.net';
-> ```
-> Then login with password `BW&&Q6Spr^&O`.
+| Email                     | Password       | Role      |
+|---------------------------|----------------|-----------|
+| test@example.com          | password123    | Admin     |
+| gkaiser@example.net       | BW&&Q6Spr^&O   | Manager   |
+| cwarren@example.net       | password123    | Staff     |
 
 ### 5. Environment Variables (Backend)
 
