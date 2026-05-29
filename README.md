@@ -171,4 +171,4 @@ inventory-procurement-system/
 
 ## License
 
-MIT
+MIT[LICENSE]
