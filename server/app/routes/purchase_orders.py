@@ -56,7 +56,7 @@ def cancel_order(po_id):
     if not row:
         conn.close()
         return jsonify({"error": "Order not found"}), 404
-    if row["status"] != "pending":
+    if row["status"] not in ["pending", "approved"]:
         conn.close()
         return jsonify({"error": "Only pending orders can be cancelled"}), 400
     if not (role_id == 1 or row["created_by"] == user_id):

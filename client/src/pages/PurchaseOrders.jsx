@@ -9,7 +9,7 @@ export default function PurchaseOrders() {
   const [showCreate, setShowCreate] = useState(false);
   const [newOrder, setNewOrder] = useState({ supplier_id: '', items: [], notes: '' });
   const [error, setError] = useState('');
-  const [orderItems, setOrderItems] = useState({}); // { orderId: [items] }
+  const [orderItems, setOrderItems] = useState({});
   const { user } = useAuth();
   const isAdmin = user?.role_id === 1;
   const isManager = user?.role_id === 2;
@@ -34,7 +34,6 @@ export default function PurchaseOrders() {
 
   const loadOrderItems = async (orderId) => {
     if (orderItems[orderId]) {
-      // Already loaded, remove to hide
       setOrderItems(prev => {
         const newState = { ...prev };
         delete newState[orderId];
@@ -70,7 +69,6 @@ export default function PurchaseOrders() {
 
   const handleReceive = async (orderId) => {
     try {
-      // Fetch full order details including items
       const orderRes = await api.get(`/purchase-orders/${orderId}`);
       const order = orderRes.data;
       const items = (order.items || []).map(i => ({
@@ -117,6 +115,7 @@ export default function PurchaseOrders() {
     if (status === 'pending') return 'text-yellow-400';
     if (status === 'approved') return 'text-green-400';
     if (status === 'received') return 'text-blue-400';
+    if (status === 'cancelled') return 'text-red-400';
     return 'text-gray-400';
   };
 
@@ -179,12 +178,13 @@ export default function PurchaseOrders() {
                       Mark Received
                     </button>
                   )}
-                  {order.status === 'pending' && (isAdmin || order.created_by === user?.id) && (
+                  {/* Cancel button for pending or approved orders */}
+                  {(order.status === 'pending' || order.status === 'approved') && (isAdmin || order.created_by === user?.id) && (
                     <button
                       onClick={() => handleCancel(order.id)}
                       className="px-3 py-1.5 bg-red-700 hover:bg-red-600 rounded-lg text-white text-sm transition-colors"
                     >
-                      Cancel
+                      Cancel Order
                     </button>
                   )}
                 </div>
