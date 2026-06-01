@@ -9,6 +9,7 @@ export default function PurchaseOrders() {
   const [showCreate, setShowCreate] = useState(false);
   const [newOrder, setNewOrder] = useState({ supplier_id: '', items: [], notes: '' });
   const [error, setError] = useState('');
+  const [orderItems, setOrderItems] = useState({}); // { orderId: [items] }
   const { user } = useAuth();
   const isAdmin = user?.role_id === 1;
   const isManager = user?.role_id === 2;
@@ -31,6 +32,24 @@ export default function PurchaseOrders() {
 
   useEffect(() => { fetchData(); }, []);
 
+  const loadOrderItems = async (orderId) => {
+    if (orderItems[orderId]) {
+      // Already loaded, remove to hide
+      setOrderItems(prev => {
+        const newState = { ...prev };
+        delete newState[orderId];
+        return newState;
+      });
+      return;
+    }
+    try {
+      const res = await api.get(`/purchase-orders/${orderId}`);
+      setOrderItems(prev => ({ ...prev, [orderId]: res.data.items || [] }));
+    } catch (err) {
+      setError('Failed to load order items');
+    }
+  };
+
   const handleApprove = async (orderId) => {
     try {
       await api.put(`/purchase-orders/${orderId}/approve`);
@@ -40,9 +59,20 @@ export default function PurchaseOrders() {
     }
   };
 
+  const handleCancel = async (orderId) => {
+    try {
+      await api.put(`/purchase-orders/${orderId}/cancel`);
+      fetchData();
+    } catch (err) {
+      setError('Failed to cancel order');
+    }
+  };
+
   const handleReceive = async (orderId) => {
     try {
-      const order = orders.find(o => o.id === orderId);
+      // Fetch full order details including items
+      const orderRes = await api.get(`/purchase-orders/${orderId}`);
+      const order = orderRes.data;
       const items = (order.items || []).map(i => ({
         product_id: i.product_id,
         quantity_received: i.quantity_ordered,
@@ -122,7 +152,7 @@ export default function PurchaseOrders() {
                 <div>
                   <span className="text-gray-500 text-xs">PO #{order.id}</span>
                   <div className="text-gray-200 font-medium">Supplier: {order.supplier_name}</div>
-                  <div className="text-sm mt-1">
+                  <div className="text-white">
                     Status:{' '}
                     <span className={`font-semibold ${statusColor(order.status)}`}>
                       {order.status}
@@ -149,8 +179,40 @@ export default function PurchaseOrders() {
                       Mark Received
                     </button>
                   )}
+                  {order.status === 'pending' && (isAdmin || order.created_by === user?.id) && (
+                    <button
+                      onClick={() => handleCancel(order.id)}
+                      className="px-3 py-1.5 bg-red-700 hover:bg-red-600 rounded-lg text-white text-sm transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  )}
                 </div>
               </div>
+
+              {/* Show/Hide Items Button */}
+              <button
+                onClick={() => loadOrderItems(order.id)}
+                className="text-xs text-gray-400 hover:text-gray-300 mt-2 focus:outline-none"
+              >
+                {orderItems[order.id] ? 'Hide Items' : 'Show Items'}
+              </button>
+
+              {/* Items List */}
+              {orderItems[order.id] && (
+                <div className="mt-2 border-t border-gray-800 pt-2">
+                  <div className="text-xs text-gray-400 mb-1">Ordered Items:</div>
+                  {orderItems[order.id].map((item, idx) => (
+                    <div key={idx} className="text-xs text-gray-300 flex justify-between">
+                      <span>{item.product_name} (ID: {item.product_id})</span>
+                      <span>
+                        Ordered: {item.quantity_ordered} | Received: {item.quantity_received || 0}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <div className="text-xs text-gray-500 mt-2">
                 Created: {new Date(order.created_at).toLocaleString()}
               </div>

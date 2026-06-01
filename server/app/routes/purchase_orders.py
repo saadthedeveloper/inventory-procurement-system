@@ -17,7 +17,7 @@ def is_staff():
     return claims.get("role_id") in [1,2,3]  # any logged in user
 
 # ------------------------------------------------------------------
-# GET /purchase-orders - List all purchase orders (all authenticated users)
+# GET /purchase-orders - List all purchase orders
 # ------------------------------------------------------------------
 @purchase_orders_bp.route("", methods=["GET"])
 @jwt_required()
@@ -39,6 +39,33 @@ def get_purchase_orders():
     orders = cursor.fetchall()
     conn.close()
     return jsonify(orders), 200
+
+# ------------------------------------------------------------------
+# Cancel PO (Admin or creator)
+# ------------------------------------------------------------------
+@purchase_orders_bp.route("/<int:po_id>/cancel", methods=["PUT"])
+@jwt_required()
+def cancel_order(po_id):
+    claims = get_jwt()
+    role_id = claims.get("role_id")
+    user_id = int(get_jwt_identity())
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT status, created_by FROM purchase_orders WHERE id = %s", (po_id,))
+    row = cursor.fetchone()
+    if not row:
+        conn.close()
+        return jsonify({"error": "Order not found"}), 404
+    if row["status"] != "pending":
+        conn.close()
+        return jsonify({"error": "Only pending orders can be cancelled"}), 400
+    if not (role_id == 1 or row["created_by"] == user_id):
+        conn.close()
+        return jsonify({"error": "Not authorized to cancel this order"}), 403
+    cursor.execute("UPDATE purchase_orders SET status = 'cancelled', updated_at = NOW() WHERE id = %s", (po_id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"message": "Order cancelled"}), 200
 
 # ------------------------------------------------------------------
 # GET /purchase-orders/<id> - Get one purchase order with its items
